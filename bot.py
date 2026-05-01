@@ -280,7 +280,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "— лицо лучше поставить по центру\n"
         "— не слишком далеко\n"
         "— без сильных обрезаний головы и плеч\n\n"
-        "Нажми кнопку ниже:",
+        "Для начала, нажми кнопку ниже:",
         reply_markup=keyboard
     )
 
@@ -355,9 +355,10 @@ def main():
     app = (
         ApplicationBuilder()
         .token(TOKEN)
-        .connect_timeout(30)
-        .read_timeout(30)
-        .write_timeout(30)
+        .connect_timeout(60)
+        .read_timeout(60)
+        .write_timeout(60)
+        .pool_timeout(60)
         .build()
     )
 
