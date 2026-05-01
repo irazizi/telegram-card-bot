@@ -10,7 +10,8 @@ from telegram.ext import (
     filters,
 )
 
-TOKEN = "8755891305:AAGCOtYiTn1Eelmw_1XqQq9X362iXGp3XWE"
+import os
+TOKEN = os.getenv("BOT_TOKEN")
 
 ASK_ACTION, ASK_TEMPLATE, ASK_NAME, ASK_PHOTO = range(4)
 
