@@ -273,7 +273,10 @@ def render_card(template_name, name, photo_bytes):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = ReplyKeyboardMarkup(
-        [["Создать карточку"]],
+        [
+            ["Создать карточку"],
+            ["Начать с начала"],
+        ],
         resize_keyboard=True
     )
 
@@ -388,7 +391,10 @@ def main():
                 MessageHandler(filters.PHOTO, get_photo)
             ],
         },
-        fallbacks=[CommandHandler("start", start)],
+        fallbacks=[
+            CommandHandler("start", start),
+            MessageHandler(filters.Regex("^Начать с начала$"), start),
+        ],
     )
 
     app.add_handler(conv)
