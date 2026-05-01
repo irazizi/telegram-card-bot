@@ -19,7 +19,7 @@ FONT_PATH = "font.ttf"
 
 TEMPLATES = {
     "Lifestyle Ambassador": {
-        "file": "templates/lifestyle.png",
+        "file": "templates/lifestyle.jpg",
         "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 1116, "diameter": 790},
         "text_color": (0, 0, 0),
@@ -27,7 +27,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Silver Ambassador": {
-        "file": "templates/silver.png",
+        "file": "templates/silver.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -35,7 +35,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Gold Ambassador": {
-        "file": "templates/gold.png",
+        "file": "templates/gold.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -43,7 +43,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Platinum Ambassador": {
-        "file": "templates/platinum.png",
+        "file": "templates/platinum.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -51,7 +51,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Titanium Ambassador": {
-        "file": "templates/titanium.png",
+        "file": "templates/titanium.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -59,7 +59,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Jade Ambassador": {
-        "file": "templates/jade.png",
+        "file": "templates/jade.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -67,7 +67,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Pearl Ambassador": {
-        "file": "templates/pearl.png",
+        "file": "templates/pearl.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -75,7 +75,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Emerald Ambassador": {
-        "file": "templates/emerald.png",
+        "file": "templates/emerald.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -83,7 +83,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Ruby Ambassador": {
-        "file": "templates/ruby.png",
+        "file": "templates/ruby.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -91,7 +91,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Sapphire Ambassador": {
-        "file": "templates/sapphire.png",
+        "file": "templates/sapphire.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -99,7 +99,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Diamond Ambassador": {
-        "file": "templates/diamond.png",
+        "file": "templates/diamond.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -107,7 +107,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Double Diamond Ambassador": {
-        "file": "templates/doublediamond.png",
+        "file": "templates/doublediamond.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -115,7 +115,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Triple Diamond Ambassador": {
-        "file": "templates/triplediamond.png",
+        "file": "templates/triplediamond.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -123,7 +123,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Blue Diamond Ambassador": {
-        "file": "templates/bluediamond.png",
+        "file": "templates/bluediamond.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
@@ -131,7 +131,7 @@ TEMPLATES = {
         "min_font_size": 40,
     },
     "Black Diamond Ambassador": {
-        "file": "templates/blackdiamond.png",
+        "file": "templates/blackdiamond.jpg",
         "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
         "photo_circle": {"cx": 995, "cy": 506, "diameter": 737},
         "text_color": (255, 255, 255),
