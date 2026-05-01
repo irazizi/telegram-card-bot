@@ -260,8 +260,12 @@ def render_card(template_name, name, photo_bytes):
     )
 
     output = BytesIO()
-    output.name = "result.png"
-    template.save(output, "PNG")
+    output.name = "result.jpg"
+
+    # JPEG не поддерживает прозрачность, поэтому переводим в RGB
+    final_image = template.convert("RGB")
+    final_image.save(output, format="JPEG", quality=95, optimize=True)
+
     output.seek(0)
 
     return output
