@@ -375,18 +375,23 @@ def main():
         entry_points=[CommandHandler("start", start)],
         states={
             ASK_ACTION: [
-                MessageHandler(filters.Regex("^Создать карточку$"), create_card)
+                MessageHandler(filters.Regex("^Начать с начала$"), start),
+                MessageHandler(filters.Regex("^Создать карточку$"), create_card),
             ],
             ASK_TEMPLATE: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, choose_template)
+                MessageHandler(filters.Regex("^Начать с начала$"), start),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, choose_template),
             ],
             ASK_NAME: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)
+                MessageHandler(filters.Regex("^Начать с начала$"), start),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, get_name),
             ],
             ASK_PHOTO: [
-                MessageHandler(filters.PHOTO, get_photo)
+                MessageHandler(filters.Regex("^Начать с начала$"), start),
+                MessageHandler(filters.PHOTO, get_photo),
             ],
         },
+        
         fallbacks=[
             CommandHandler("start", start),
             MessageHandler(filters.Regex("^Начать с начала$"), start),
