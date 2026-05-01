@@ -289,7 +289,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "— не слишком далеко\n"
         "— без сильных обрезаний головы и плеч\n\n"
         "Для начала, нажми кнопку ниже:",
-        reply_markup=keyboard
+        reply_markup=MAIN_KEYBOARD
     )
 
     return ASK_ACTION
@@ -303,7 +303,7 @@ async def create_card(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         "Выбери шаблон:",
-        reply_markup=MAIN_KEYBOARD
+        reply_markup=keyboard
     )
 
     return ASK_TEMPLATE
@@ -353,8 +353,8 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     await update.message.reply_text(
-    "Готово. Можно создать ещё одну карточку.",
-    reply_markup=MAIN_KEYBOARD
+        "Готово. Можно создать ещё одну карточку.",
+        reply_markup=MAIN_KEYBOARD
     )
 
     return ASK_ACTION
