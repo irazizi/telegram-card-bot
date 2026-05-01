@@ -17,6 +17,14 @@ ASK_ACTION, ASK_TEMPLATE, ASK_NAME, ASK_PHOTO = range(4)
 
 FONT_PATH = "font.ttf"
 
+MAIN_KEYBOARD = ReplyKeyboardMarkup(
+    [
+        ["Создать карточку"],
+        ["Начать с начала"],
+    ],
+    resize_keyboard=True
+)
+
 TEMPLATES = {
     "Lifestyle Ambassador": {
         "file": "templates/lifestyle.jpg",
@@ -272,13 +280,6 @@ def render_card(template_name, name, photo_bytes):
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = ReplyKeyboardMarkup(
-        [
-            ["Создать карточку"],
-            ["Начать с начала"],
-        ],
-        resize_keyboard=True
-    )
 
     await update.message.reply_text(
         "Привет 👋\n\n"
@@ -302,7 +303,7 @@ async def create_card(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         "Выбери шаблон:",
-        reply_markup=keyboard
+        reply_markup=MAIN_KEYBOARD
     )
 
     return ASK_TEMPLATE
@@ -319,7 +320,7 @@ async def choose_template(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         "Напиши имя и фамилию",
-        reply_markup=ReplyKeyboardRemove()
+        reply_markup=MAIN_KEYBOARD
     )
 
     return ASK_NAME
@@ -351,14 +352,9 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         connect_timeout=60,
     )
 
-    keyboard = ReplyKeyboardMarkup(
-        [["Создать карточку"]],
-        resize_keyboard=True
-    )
-
     await update.message.reply_text(
-        "Готово. Можно создать ещё одну карточку.",
-        reply_markup=keyboard
+    "Готово. Можно создать ещё одну карточку.",
+    reply_markup=MAIN_KEYBOARD
     )
 
     return ASK_ACTION
