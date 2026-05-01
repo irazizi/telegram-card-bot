@@ -264,7 +264,7 @@ def render_card(template_name, name, photo_bytes):
 
     # JPEG не поддерживает прозрачность, поэтому переводим в RGB
     final_image = template.convert("RGB")
-    final_image.save(output, format="JPEG", quality=95, optimize=True)
+    final_image.save(output, format="JPEG", quality=88, optimize=True, progressive=True)
 
     output.seek(0)
 
@@ -340,7 +340,13 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     result = render_card(template_name, name, photo_bytes)
 
-    await update.message.reply_document(result)
+    await update.message.reply_document(
+        document=result,
+        filename="result.jpg",
+        read_timeout=120,
+        write_timeout=120,
+        connect_timeout=60,
+    )
 
     keyboard = ReplyKeyboardMarkup(
         [["Создать карточку"]],
