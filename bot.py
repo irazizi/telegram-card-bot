@@ -147,6 +147,32 @@ def split_name(text):
         return text
     return f"{parts[0]}\n{' '.join(parts[1:])}"
 
+def split_lifestyle_name(text):
+    parts = text.strip().split()
+
+    if len(parts) <= 1:
+        return text
+
+    lower_parts = [p.lower() for p in parts]
+
+    # Случай: "Имя и Имя Фамилия"
+    if "и" in lower_parts:
+        i_index = lower_parts.index("и")
+
+        first_name = " ".join(parts[:i_index])
+        second_name = " ".join(parts[i_index + 1:-1])
+        surname = parts[-1]
+
+        names_length = len(first_name.replace(" ", "")) + len(second_name.replace(" ", ""))
+
+        if first_name and second_name and surname:
+            if names_length <= 12:
+                return f"{first_name} и {second_name}\n{surname}"
+            else:
+                return f"{first_name}\nи {second_name}\n{surname}"
+
+    return split_name(text)
+
 
 def fit_text(draw, text, font_path, box_w, box_h, max_size, min_size):
     for size in range(max_size, min_size - 1, -4):
@@ -200,7 +226,12 @@ def render_card(template_name, name, photo_bytes):
     if template_name in ["Silver Ambassador", "Gold Ambassador", "Platinum Ambassador", "Titanium Ambassador", "Jade Ambassador", "Pearl Ambassador", "Emerald Ambassador", "Ruby Ambassador", "Sapphire Ambassador", "Diamond Ambassador", "Double Diamond Ambassador", "Triple Diamond Ambassador", "Blue Diamond Ambassador", "Black Diamond Ambassador"]:
         prepared_name = name.strip()
     else:
-        prepared_name = split_name(name)
+        if template_name == "Lifestyle Ambassador":
+            prepared_name = split_lifestyle_name(name)
+        elif template_name in ["Silver Ambassador", "Gold Ambassador", "Platinum Ambassador", "Titanium Ambassador", "Jade Ambassador", "Pearl Ambassador", "Emerald Ambassador", "Ruby Ambassador", "Sapphire Ambassador", "Diamond Ambassador", "Double Diamond Ambassador", "Triple Diamond Ambassador", "Blue Diamond Ambassador", "Black Diamond Ambassador"]:
+            prepared_name = name.strip()
+        else:
+            prepared_name = split_name(name)
 
     font = fit_text(
         draw=draw,
