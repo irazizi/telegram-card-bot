@@ -339,20 +339,20 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     template_name = context.user_data["template_name"]
 
     await update.message.reply_text("⏳ Делаю карточку, подожди немного...")
-    
-    photo = update.message.photo[-1]
-    file = await photo.get_file()
-    photo_bytes = await file.download_as_bytearray()
-
-    # Сжимаем фото перед обработкой
-    img = Image.open(BytesIO(photo_bytes)).convert("RGB")
-    img.thumbnail((1200, 1200))
-
-buffer = BytesIO()
-img.save(buffer, format="JPEG", quality=85)
-photo_bytes = buffer.getvalue()
 
     try:
+        photo = update.message.photo[-1]
+        file = await photo.get_file()
+        photo_bytes = await file.download_as_bytearray()
+
+        # Сжимаем фото перед обработкой
+        img = Image.open(BytesIO(photo_bytes)).convert("RGB")
+        img.thumbnail((1200, 1200))
+
+        buffer = BytesIO()
+        img.save(buffer, format="JPEG", quality=85)
+        photo_bytes = buffer.getvalue()
+
         result = render_card(template_name, name, photo_bytes)
 
         await update.message.reply_document(
@@ -363,16 +363,16 @@ photo_bytes = buffer.getvalue()
             connect_timeout=60,
         )
 
+        await update.message.reply_text(
+            "Готово. Можно создать ещё одну карточку.",
+            reply_markup=MAIN_KEYBOARD
+        )
+
     except Exception as e:
         await update.message.reply_text(
-            f"❌ Ошибка при обработке фото: {type(e).__name__}"
+            f"❌ Ошибка при обработке фото: {type(e).__name__}",
+            reply_markup=MAIN_KEYBOARD
         )
-        return ASK_ACTION
-
-    await update.message.reply_text(
-        "Готово. Можно создать ещё одну карточку.",
-        reply_markup=MAIN_KEYBOARD
-    )
 
     return ASK_ACTION
 
