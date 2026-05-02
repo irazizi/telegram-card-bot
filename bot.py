@@ -11,11 +11,16 @@ from telegram.ext import (
 )
 
 import os
+import time
+
 TOKEN = os.getenv("BOT_TOKEN")
 
 ASK_ACTION, ASK_TEMPLATE, ASK_NAME, ASK_PHOTO = range(4)
 
 FONT_PATH = "font.ttf"
+
+USER_LAST_GENERATION_TIME = {}
+GENERATION_COOLDOWN_SECONDS = 15
 
 MAIN_KEYBOARD = ReplyKeyboardMarkup(
     [
@@ -337,6 +342,21 @@ async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     name = context.user_data["name"]
     template_name = context.user_data["template_name"]
+    
+    user_id = update.effective_user.id
+    current_time = time.time()
+
+    last_time = USER_LAST_GENERATION_TIME.get(user_id, 0)
+
+    if current_time - last_time < GENERATION_COOLDOWN_SECONDS:
+        wait_time = int(GENERATION_COOLDOWN_SECONDS - (current_time - last_time))
+        await update.message.reply_text(
+            f"⏳ Подожди {wait_time} сек перед следующей карточкой",
+            reply_markup=MAIN_KEYBOARD
+        )
+        return ASK_ACTION
+
+USER_LAST_GENERATION_TIME[user_id] = current_time
 
     await update.message.reply_text("⏳ Делаю карточку, подожди немного...")
 
