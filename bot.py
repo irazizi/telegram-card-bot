@@ -356,7 +356,7 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return ASK_ACTION
 
-USER_LAST_GENERATION_TIME[user_id] = current_time
+    USER_LAST_GENERATION_TIME[user_id] = current_time
 
     await update.message.reply_text("⏳ Делаю карточку, подожди немного...")
 
