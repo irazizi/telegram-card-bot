@@ -352,7 +352,13 @@ buffer = BytesIO()
 img.save(buffer, format="JPEG", quality=85)
 photo_bytes = buffer.getvalue()
 
-    result = render_card(template_name, name, photo_bytes)
+    try:
+        result = render_card(template_name, name, photo_bytes)
+    except Exception as e:
+        await update.message.reply_text(
+            f"❌ Ошибка при обработке фото: {type(e).__name__}"
+        )
+        return ASK_ACTION
 
     await update.message.reply_document(
         document=result,
