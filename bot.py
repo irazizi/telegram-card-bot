@@ -382,12 +382,8 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         result = render_card(template_name, name, photo_bytes)
 
-        await update.message.reply_document(
-            document=result,
-            filename="result.jpg",
-            read_timeout=120,
-            write_timeout=120,
-            connect_timeout=60,
+        await update.message.reply_photo(
+            photo=result
         )
 
         await update.message.reply_text(
