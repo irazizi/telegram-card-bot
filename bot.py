@@ -153,6 +153,7 @@ TEMPLATES = {
     },
 }
 
+TEMPLATE_CACHE = {}
 
 def split_name(text):
     parts = text.strip().split()
@@ -221,7 +222,12 @@ def make_circle(photo, diameter):
 def render_card(template_name, name, photo_bytes):
     settings = TEMPLATES[template_name]
 
-    template = Image.open(settings["file"]).convert("RGBA")
+    template_path = settings["file"]
+
+    if template_path not in TEMPLATE_CACHE:
+        TEMPLATE_CACHE[template_path] = Image.open(template_path).convert("RGBA")
+
+    template = TEMPLATE_CACHE[template_path].copy()
     draw = ImageDraw.Draw(template)
 
     # Фото
