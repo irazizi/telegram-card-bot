@@ -188,7 +188,7 @@ def split_lifestyle_name(text):
 
 
 def fit_text(draw, text, font_path, box_w, box_h, max_size, min_size):
-    for size in range(max_size, min_size - 1, -4):
+    for size in range(max_size, min_size - 1, -6):
         font = ImageFont.truetype(font_path, size)
         bbox = draw.multiline_textbbox((0, 0), text, font=font, spacing=10)
         text_w = bbox[2] - bbox[0]
@@ -277,7 +277,8 @@ def render_card(template_name, name, photo_bytes):
 
     # JPEG не поддерживает прозрачность, поэтому переводим в RGB
     final_image = template.convert("RGB")
-    final_image.save(output, format="JPEG", quality=88, optimize=True, progressive=True)
+    final_image.thumbnail((1400, 1400))
+    final_image.save(output, format="JPEG", quality=85)
 
     output.seek(0)
 
@@ -367,7 +368,7 @@ async def get_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # Сжимаем фото перед обработкой
         img = Image.open(BytesIO(photo_bytes)).convert("RGB")
-        img.thumbnail((1200, 1200))
+        img.thumbnail((1000, 1000))
 
         buffer = BytesIO()
         img.save(buffer, format="JPEG", quality=85)
