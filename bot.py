@@ -15,7 +15,7 @@ import time
 
 TOKEN = os.getenv("BOT_TOKEN")
 
-ASK_ACTION, ASK_TEMPLATE, ASK_NAME, ASK_PHOTO = range(4)
+ASK_ACTION, ASK_CATEGORY, ASK_TEMPLATE, ASK_NAME, ASK_PHOTO = range(5)
 
 FONT_PATH = "font.ttf"
 
@@ -24,7 +24,9 @@ GENERATION_COOLDOWN_SECONDS = 15
 
 MAIN_KEYBOARD = ReplyKeyboardMarkup(
     [
-        ["Создать карточку"],
+        ["Lifestyle Ambassador"],
+        ["Присвоение статуса"],
+        ["Бонусы"],
         ["Начать с начала"],
     ],
     resize_keyboard=True
@@ -151,6 +153,54 @@ TEMPLATES = {
         "max_font_size": 120,
         "min_font_size": 40,
     },
+    "Fast Start Bonus 1": {
+        "file": "templates/fast_start_1.jpg",
+        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
+        "text_color": (255, 255, 255),
+        "max_font_size": 150,
+        "min_font_size": 40,
+    },
+    "Fast Start Bonus 2": {
+        "file": "templates/fast_start_2.jpg",
+        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
+        "text_color": (255, 255, 255),
+        "max_font_size": 150,
+        "min_font_size": 40,
+    },
+    "Fast Start Bonus 3": {
+        "file": "templates/fast_start_3.jpg",
+        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
+        "text_color": (255, 255, 255),
+        "max_font_size": 150,
+        "min_font_size": 40,
+    },
+    "Boost Bonus Gold": {
+        "file": "templates/boost_gold.jpg",
+        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
+        "text_color": (255, 255, 255),
+        "max_font_size": 150,
+        "min_font_size": 40,
+    },
+    "Boost Bonus Platinum": {
+        "file": "templates/boost_platinum.jpg",
+        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
+        "text_color": (255, 255, 255),
+        "max_font_size": 150,
+        "min_font_size": 40,
+    },
+    "Auto Bonus": {
+        "file": "templates/auto_bonus.jpg",
+        "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
+        "photo_circle": {"cx": 1000, "cy": 860, "diameter": 830},
+        "text_color": (255, 255, 255),
+        "max_font_size": 120,
+        "min_font_size": 40,
+    },
 }
 
 TEMPLATE_CACHE = {}
@@ -242,15 +292,41 @@ def render_card(template_name, name, photo_bytes):
 
     # Имя
     box = settings["name_box"]
-    if template_name in ["Silver Ambassador", "Gold Ambassador", "Platinum Ambassador", "Titanium Ambassador", "Jade Ambassador", "Pearl Ambassador", "Emerald Ambassador", "Ruby Ambassador", "Sapphire Ambassador", "Diamond Ambassador", "Double Diamond Ambassador", "Triple Diamond Ambassador", "Blue Diamond Ambassador", "Black Diamond Ambassador"]:
+
+    STATUS_TEMPLATES = [
+        "Silver Ambassador",
+        "Gold Ambassador",
+        "Platinum Ambassador",
+        "Titanium Ambassador",
+        "Jade Ambassador",
+        "Pearl Ambassador",
+        "Emerald Ambassador",
+        "Ruby Ambassador",
+        "Sapphire Ambassador",
+        "Diamond Ambassador",
+        "Double Diamond Ambassador",
+        "Triple Diamond Ambassador",
+        "Blue Diamond Ambassador",
+        "Black Diamond Ambassador",
+        "Auto Bonus",
+    ]
+
+    LIFESTYLE_STYLE_TEMPLATES = [
+        "Lifestyle Ambassador",
+        "Fast Start Bonus 1",
+        "Fast Start Bonus 2",
+        "Fast Start Bonus 3",
+        "Boost Bonus Gold",
+        "Boost Bonus Platinum",
+    ]
+
+    if template_name in STATUS_TEMPLATES:
         prepared_name = name.strip()
+    elif template_name in LIFESTYLE_STYLE_TEMPLATES:
+        prepared_name = split_lifestyle_name(name)
     else:
-        if template_name == "Lifestyle Ambassador":
-            prepared_name = split_lifestyle_name(name)
-        elif template_name in ["Silver Ambassador", "Gold Ambassador", "Platinum Ambassador", "Titanium Ambassador", "Jade Ambassador", "Pearl Ambassador", "Emerald Ambassador", "Ruby Ambassador", "Sapphire Ambassador", "Diamond Ambassador", "Double Diamond Ambassador", "Triple Diamond Ambassador", "Blue Diamond Ambassador", "Black Diamond Ambassador"]:
-            prepared_name = name.strip()
-        else:
-            prepared_name = split_name(name)
+        prepared_name = split_name(name)
+    
 
     font = fit_text(
         draw=draw,
@@ -308,18 +384,81 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def create_card(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = ReplyKeyboardMarkup(
-        [["Lifestyle Ambassador"], ["Silver Ambassador"], ["Gold Ambassador"], ["Platinum Ambassador"], ["Titanium Ambassador"], ["Jade Ambassador"], ["Pearl Ambassador"], ["Emerald Ambassador"], ["Ruby Ambassador"], ["Sapphire Ambassador"], ["Diamond Ambassador"], ["Double Diamond Ambassador"], ["Triple Diamond Ambassador"], ["Blue Diamond Ambassador"], ["Black Diamond Ambassador"]],
-        resize_keyboard=True
+    await update.message.reply_text(
+        "Выбери раздел:",
+        reply_markup=CATEGORY_KEYBOARD
     )
+
+    return ASK_CATEGORY
+
+async def choose_category(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    category = update.message.text
+
+    if category == "Lifestyle Ambassador":
+        context.user_data["template_name"] = "Lifestyle Ambassador"
+
+        await update.message.reply_text(
+            "Напиши имя и фамилию",
+            reply_markup=MAIN_KEYBOARD
+        )
+
+        return ASK_NAME
+
+    elif category == "Присвоение статуса":
+        keyboard = ReplyKeyboardMarkup(
+            [
+                ["Silver Ambassador"],
+                ["Gold Ambassador"],
+                ["Platinum Ambassador"],
+                ["Titanium Ambassador"],
+                ["Jade Ambassador"],
+                ["Pearl Ambassador"],
+                ["Emerald Ambassador"],
+                ["Ruby Ambassador"],
+                ["Sapphire Ambassador"],
+                ["Diamond Ambassador"],
+                ["Double Diamond Ambassador"],
+                ["Triple Diamond Ambassador"],
+                ["Blue Diamond Ambassador"],
+                ["Black Diamond Ambassador"],
+                ["Начать с начала"],
+            ],
+            resize_keyboard=True
+        )
+
+        await update.message.reply_text(
+            "Выбери статус:",
+            reply_markup=keyboard
+        )
+
+        return ASK_TEMPLATE
+
+    elif category == "Бонусы":
+        keyboard = ReplyKeyboardMarkup(
+            [
+                ["Fast Start Bonus 1"],
+                ["Fast Start Bonus 2"],
+                ["Fast Start Bonus 3"],
+                ["Boost Bonus Gold"],
+                ["Boost Bonus Platinum"],
+                ["Auto Bonus"],
+                ["Начать с начала"],
+            ],
+            resize_keyboard=True
+        )
+
+        await update.message.reply_text(
+            "Выбери бонус:",
+            reply_markup=keyboard
+        )
+
+        return ASK_TEMPLATE
 
     await update.message.reply_text(
-        "Выбери шаблон:",
-        reply_markup=keyboard
+        "Пожалуйста, выбери раздел кнопкой."
     )
 
-    return ASK_TEMPLATE
-
+    return ASK_CATEGORY
 
 async def choose_template(update: Update, context: ContextTypes.DEFAULT_TYPE):
     template_name = update.message.text
@@ -417,6 +556,10 @@ def main():
             ASK_ACTION: [
                 MessageHandler(filters.Regex("^Начать с начала$"), start),
                 MessageHandler(filters.Regex("^Создать карточку$"), create_card),
+            ],
+            ASK_CATEGORY: [
+                MessageHandler(filters.Regex("^Начать с начала$"), start),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, choose_category),
             ],
             ASK_TEMPLATE: [
                 MessageHandler(filters.Regex("^Начать с начала$"), start),
