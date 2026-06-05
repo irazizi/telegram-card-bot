@@ -556,6 +556,7 @@ def main():
             ASK_ACTION: [
                 MessageHandler(filters.Regex("^Начать с начала$"), start),
                 MessageHandler(filters.Regex("^Создать карточку$"), create_card),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, choose_category),
             ],
             ASK_CATEGORY: [
                 MessageHandler(filters.Regex("^Начать с начала$"), start),
