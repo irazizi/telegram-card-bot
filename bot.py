@@ -155,7 +155,7 @@ TEMPLATES = {
     },
     "Fast Start Bonus 1": {
         "file": "templates/fast_start_1.jpg",
-        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "name_box": {"x": 90, "y": 800, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
         "text_color": (255, 255, 255),
         "max_font_size": 150,
@@ -163,7 +163,7 @@ TEMPLATES = {
     },
     "Fast Start Bonus 2": {
         "file": "templates/fast_start_2.jpg",
-        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "name_box": {"x": 90, "y": 800, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
         "text_color": (255, 255, 255),
         "max_font_size": 150,
@@ -171,7 +171,7 @@ TEMPLATES = {
     },
     "Fast Start Bonus 3": {
         "file": "templates/fast_start_3.jpg",
-        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "name_box": {"x": 90, "y": 800, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
         "text_color": (255, 255, 255),
         "max_font_size": 150,
@@ -179,7 +179,7 @@ TEMPLATES = {
     },
     "Boost Bonus Gold": {
         "file": "templates/boost_gold.jpg",
-        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "name_box": {"x": 90, "y": 800, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
         "text_color": (255, 255, 255),
         "max_font_size": 150,
@@ -187,7 +187,7 @@ TEMPLATES = {
     },
     "Boost Bonus Platinum": {
         "file": "templates/boost_platinum.jpg",
-        "name_box": {"x": 90, "y": 900, "w": 980, "h": 360},
+        "name_box": {"x": 90, "y": 800, "w": 980, "h": 360},
         "photo_circle": {"cx": 1523, "cy": 933, "diameter": 850},
         "text_color": (255, 255, 255),
         "max_font_size": 150,
@@ -195,10 +195,10 @@ TEMPLATES = {
     },
     "Auto Bonus": {
         "file": "templates/auto_bonus.jpg",
-        "name_box": {"x": 220, "y": 1260, "w": 1600, "h": 160},
+        "name_box": {"x": 220, "y": 1360, "w": 1600, "h": 160},
         "photo_circle": {"cx": 1000, "cy": 860, "diameter": 830},
         "text_color": (255, 255, 255),
-        "max_font_size": 120,
+        "max_font_size": 130,
         "min_font_size": 40,
     },
 }
